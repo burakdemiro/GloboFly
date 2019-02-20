@@ -29,5 +29,11 @@ interface DestinationService {
                           @Field("description") desc: String,
                           @Field("country") country: String): Call<Destination>
 
+    // Bu işlemde Server'a veri gönderilmediği için RequestBody yoktur
+    // Json'da yoktur
+    // FormUrlEncoded'da yoktur
+    @DELETE("destination/{id}")
+    fun deleteDestination(@Path("id") id:Int): Call<Unit>
+
 
 }
