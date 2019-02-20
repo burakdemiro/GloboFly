@@ -6,12 +6,9 @@ import retrofit2.http.*
 
 interface DestinationService {
 
-    // Gönderilen header'ları server tarafından karşılayabilirsin (isteğe bağlı) ve ona göre işlem yaptırabilirsin
-    // Mesela Android cihazı bağlandı gibi konsola yazı yazdırmak
-    @Headers("x-device-type: Android", "x-foo: bar") // Static headers
+    // Birden fazla yere Header koymak istiyorsan bunu Interceptor (Yol kesip manipüle eden) ile yapabilirsin
     @GET("destination")
-    fun getDestinationList(@QueryMap filter: HashMap<String, String>,
-                           @Header("Accept-Language") language: String): Call<List<Destination>> // Dynamic header
+    fun getDestinationList(@QueryMap filter: HashMap<String, String>): Call<List<Destination>>
 
     // Path parameters
     // Dynamic olarak parametre ile gelir parametre Pathdeki ile serialize olur ve üstteki id yerine geçer
