@@ -19,5 +19,15 @@ interface DestinationService {
     @POST("destination")
     fun addDestination(@Body newDestination: Destination): Call<Destination>
 
+    // key-value ikilisi formunda encode yapar
+    // update yaparken formurlencoded formatında olur
+    // response json formatında gelir
+    @FormUrlEncoded
+    @PUT("destination/{id}")
+    fun updateDestination(@Path("id") id: Int,
+                          @Field("city") city: String,
+                          @Field("description") desc: String,
+                          @Field("country") country: String): Call<Destination>
+
 
 }

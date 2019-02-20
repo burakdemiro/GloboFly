@@ -87,8 +87,21 @@ class DestinationDetailActivity : AppCompatActivity() {
             destination.description = description
             destination.country = country
 
-            SampleData.updateDestination(destination);
-            finish() // Move back to DestinationListActivity
+            val destinationService = ServiceBuilder.buildService(DestinationService::class.java)
+            val requestCall = destinationService.updateDestination(id, city, description, country)
+
+            requestCall.enqueue(object : Callback<Destination> {
+                override fun onResponse(call: Call<Destination>, response: Response<Destination>) {
+                    if (response.isSuccessful) {
+                        finish()
+                        Toast.makeText(this@DestinationDetailActivity, "Updated Successfuly", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<Destination>, t: Throwable) {
+
+                }
+            })
         }
     }
 
