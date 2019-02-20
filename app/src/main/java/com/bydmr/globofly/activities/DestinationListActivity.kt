@@ -46,8 +46,10 @@ class DestinationListActivity : AppCompatActivity() {
 		// filter.put("country", "India")
 		// filter.put("count", "1")
 
-
 		val requestCall = destinationService.getDestinationList(filter)
+
+		// requestCall.isCanceled
+		// requestCall.cancel() // Kullanıcı mevcut bir indirmeyi iptal etmek istendiğinde kullanılır
 
 		requestCall.enqueue(object : Callback<List<Destination>> {
 

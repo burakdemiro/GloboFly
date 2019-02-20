@@ -9,6 +9,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 object ServiceBuilder {
 
@@ -40,7 +41,10 @@ object ServiceBuilder {
     }
 
     // retrofit işlemlerini gerçekleştirebilmesi için okHtpp'ye ihtiyaç duyar aynı zamanda interceptor gibi pluggable'ları kullanabilmesi için gereklidir
-    private val okHtpp = OkHttpClient.Builder().addInterceptor(headerInterceptor).addInterceptor(logger)
+    private val okHtpp = OkHttpClient.Builder()
+        .addInterceptor(headerInterceptor)
+        .addInterceptor(logger)
+        .callTimeout(5, TimeUnit.SECONDS) // Default değer olarak 10 saniyedir
 
     // Pastayı oluşturma aşaması araları muzlu
     private val builder = Retrofit.Builder().baseUrl(URL)
