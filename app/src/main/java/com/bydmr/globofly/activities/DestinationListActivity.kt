@@ -47,7 +47,7 @@ class DestinationListActivity : AppCompatActivity() {
 		// filter.put("count", "1")
 
 
-		val requestCall = destinationService.getDestinationList(filter)
+		val requestCall = destinationService.getDestinationList(filter, "EN")
 
 		requestCall.enqueue(object : Callback<List<Destination>> {
 
